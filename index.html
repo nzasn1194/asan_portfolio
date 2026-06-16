@@ -29,25 +29,18 @@
     }
 
     html::before {
-      content: "1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000";
+      content: "";
       position: fixed;
-      inset: 0 -18% auto -18%;
+      inset: 0;
       z-index: 0;
       pointer-events: none;
-      min-height: 220vh;
-      padding: 2rem 4%;
-      color: rgba(0,229,192,.16);
-      font-family: 'Space Grotesk', monospace;
-      font-size: clamp(.78rem, 1.35vw, 1rem);
-      font-weight: 600;
-      letter-spacing: .28em;
-      line-height: 2.65;
-      text-transform: uppercase;
-      word-spacing: .95rem;
-      word-break: break-all;
-      text-shadow: 0 0 18px rgba(0,229,192,.14);
-      animation: binarySweep 24s linear infinite;
-      mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 86%, transparent 100%);
+      opacity: .18;
+      background-image:
+        linear-gradient(180deg, rgba(0,229,192,.26) 0 1px, transparent 1px 40px),
+        linear-gradient(90deg, transparent 0 10%, rgba(0,200,255,.18) 10% 10.2%, transparent 10.2% 100%);
+      background-size: 100% 40px, 420px 100%;
+      animation: binaryGridFall 1.8s linear infinite;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 88%, transparent 100%);
     }
 
     body {
@@ -83,25 +76,35 @@
     }
 
     body::after {
-      content: "0101 1100 0011 1010 0110 1001 1110 0101 0010 1011 0111 0001 1001 0100 1111 0010 1011 0101 0011 1110 0100 1101 1001 0110 0001 1010 1110 0011 0101 1100 0011 1010 0110 1001 1110 0101 0010 1011 0111 0001 1001 0100 1111 0010 1011 0101 0011 1110 0100 1101 1001 0110 0001 1010 1110 0011 0101 1100 0011 1010 0110 1001 1110 0101 0010 1011 0111 0001 1001 0100 1111 0010 1011 0101 0011 1110 0100 1101 1001 0110 0001 1010 1110 0011 0101 1100 0011 1010 0110 1001 1110 0101 0010 1011 0111 0001 1001 0100 1111 0010 1011 0101 0011 1110 0100 1101 1001 0110 0001 1010 1110 0011 0101 1100 0011 1010 0110 1001 1110 0101 0010 1011 0111 0001 1001 0100 1111 0010 1011 0101 0011 1110 0100 1101 1001 0110 0001 1010 1110 0011";
+      content: "";
       position: fixed;
-      inset: 0 -8% auto -8%;
+      inset: 0;
       z-index: 0;
       pointer-events: none;
-      min-height: 240vh;
-      padding: 3rem 3%;
-      color: rgba(0,200,255,.24);
+    }
+
+    .binary-rain {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 92%, transparent 100%);
+    }
+
+    .binary-stream {
+      position: absolute;
+      top: -85vh;
+      width: 1rem;
+      color: rgba(0,200,255,.22);
       font-family: 'Space Grotesk', monospace;
-      font-size: clamp(.86rem, 1.7vw, 1.14rem);
+      font-size: clamp(.74rem, 1.1vw, .95rem);
       font-weight: 600;
-      letter-spacing: .24em;
-      line-height: 2.25;
-      text-transform: uppercase;
-      word-spacing: .85rem;
-      word-break: break-all;
-      animation: binaryStream 18s linear infinite;
-      text-shadow: 0 0 18px rgba(0,200,255,.2);
-      mask-image: linear-gradient(180deg, transparent 0%, #000 5%, #000 88%, transparent 100%);
+      line-height: 1.5;
+      text-align: center;
+      text-shadow: 0 0 18px rgba(0,200,255,.24);
+      animation: binaryColumnFall linear infinite;
+      will-change: transform;
     }
 
     header,
@@ -116,16 +119,14 @@
       to { background-position: 520px 340px, -620px 420px, 260px 220px, -340px 300px, 300px -260px; }
     }
 
-    @keyframes binaryStream {
-      from { transform: translate3d(-2%, -52%, 0); opacity: .13; }
-      35% { opacity: .24; }
-      to { transform: translate3d(2%, 6%, 0); opacity: .16; }
+    @keyframes binaryGridFall {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 0 40px, 420px 0; }
     }
 
-    @keyframes binarySweep {
-      from { transform: translate3d(5%, -50%, 0); opacity: .08; }
-      45% { opacity: .18; }
-      to { transform: translate3d(-5%, 8%, 0); opacity: .14; }
+    @keyframes binaryColumnFall {
+      from { transform: translate3d(0, -20vh, 0); }
+      to { transform: translate3d(0, 220vh, 0); }
     }
 
     /* ── HEADER ─────────────────────────────────── */
@@ -442,17 +443,55 @@
       z-index: 1;
     }
 
-    .project-thumb img:not(:only-of-type) {
-      opacity: 0;
-      animation: projectImageCycle 12s infinite;
+    .project-thumb img {
+      opacity: 1;
+      transition: opacity .25s ease;
     }
 
-    .project-thumb img:nth-of-type(2) { animation-delay: 4s; }
-    .project-thumb img:nth-of-type(3) { animation-delay: 8s; }
+    .project-thumb img:not(.active) {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-    @keyframes projectImageCycle {
-      0%, 30% { opacity: 1; }
-      36%, 100% { opacity: 0; }
+    .project-thumb img:only-of-type {
+      opacity: 1;
+    }
+
+    .project-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 34px;
+      height: 34px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0,200,255,.42);
+      border-radius: 50%;
+      background: rgba(6,13,26,.72);
+      color: var(--white);
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+
+    .project-thumb.has-gallery .project-nav {
+      display: inline-flex;
+    }
+
+    .project-nav:hover {
+      background: rgba(0,200,255,.22);
+      border-color: rgba(0,200,255,.78);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .project-nav.prev { left: .7rem; }
+    .project-nav.next { right: .7rem; }
+
+    .project-nav svg {
+      width: 18px;
+      height: 18px;
+      display: block;
     }
 
     .project-thumb span,
@@ -541,6 +580,11 @@
       font-size: 3.55rem;
       position: relative;
       overflow: hidden;
+    }
+
+    .cert-thumb img {
+      object-fit: contain;
+      background: #fff;
     }
 
     .cert-name {
@@ -875,6 +919,7 @@
   </style>
 </head>
 <body>
+<div class="binary-rain" aria-hidden="true"></div>
 
 <!-- ═══ HEADER ══════════════════════════════════════════════ -->
 <header>
@@ -1214,6 +1259,59 @@
   siteNav.querySelectorAll('a').forEach(link =>
     link.addEventListener('click', () => siteNav.classList.remove('open'))
   );
+
+  const binaryRain = document.querySelector('.binary-rain');
+  if (binaryRain) {
+    const streamText = '101001101110010111001011010011101001011100101101';
+    const streamCount = Math.max(18, Math.floor(window.innerWidth / 54));
+
+    for (let i = 0; i < streamCount; i += 1) {
+      const stream = document.createElement('span');
+      stream.className = 'binary-stream';
+      stream.textContent = streamText.split('').join('\n');
+      stream.style.left = `${(i / streamCount) * 100 + Math.random() * 2}%`;
+      stream.style.animationDuration = `${12 + Math.random() * 10}s`;
+      stream.style.animationDelay = `${Math.random() * -18}s`;
+      stream.style.opacity = `${0.35 + Math.random() * 0.55}`;
+      binaryRain.appendChild(stream);
+    }
+  }
+
+  document.querySelectorAll('.project-thumb').forEach(thumb => {
+    const images = Array.from(thumb.querySelectorAll('img'));
+    if (!images.length) return;
+
+    let currentIndex = 0;
+    images[0].classList.add('active');
+
+    if (images.length < 2) return;
+
+    thumb.classList.add('has-gallery');
+
+    const showImage = index => {
+      currentIndex = (index + images.length) % images.length;
+      images.forEach((image, imageIndex) => {
+        image.classList.toggle('active', imageIndex === currentIndex);
+      });
+    };
+
+    const createButton = (direction, label, path) => {
+      const button = document.createElement('button');
+      button.className = `project-nav ${direction}`;
+      button.type = 'button';
+      button.setAttribute('aria-label', label);
+      button.innerHTML = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="${path}" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      return button;
+    };
+
+    const prevButton = createButton('prev', 'Previous project image', 'M15 18l-6-6 6-6');
+    const nextButton = createButton('next', 'Next project image', 'M9 6l6 6-6 6');
+
+    prevButton.addEventListener('click', () => showImage(currentIndex - 1));
+    nextButton.addEventListener('click', () => showImage(currentIndex + 1));
+
+    thumb.append(prevButton, nextButton);
+  });
 </script>
 
 </body>
