@@ -21,7 +21,34 @@
       --text:      #c8daf0;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      position: relative;
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+    html::before {
+      content: "1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000 1010 0111 0001 1100 0101 1110 0010 1001 0110 1011 0000 1111 0100 0011 1101 1000";
+      position: fixed;
+      inset: -14% -18% auto -18%;
+      z-index: 0;
+      pointer-events: none;
+      min-height: 140vh;
+      padding: 2rem 4%;
+      color: rgba(0,229,192,.16);
+      font-family: 'Space Grotesk', monospace;
+      font-size: clamp(.78rem, 1.35vw, 1rem);
+      font-weight: 600;
+      letter-spacing: .28em;
+      line-height: 2.65;
+      text-transform: uppercase;
+      word-spacing: .95rem;
+      word-break: break-all;
+      text-shadow: 0 0 18px rgba(0,229,192,.14);
+      animation: binarySweep 24s linear infinite;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 90%, transparent 100%);
+    }
 
     body {
       position: relative;
@@ -63,18 +90,18 @@
       pointer-events: none;
       min-height: 180vh;
       padding: 3rem 3%;
-      color: rgba(0,200,255,.2);
+      color: rgba(0,200,255,.24);
       font-family: 'Space Grotesk', monospace;
-      font-size: clamp(.82rem, 1.55vw, 1.08rem);
+      font-size: clamp(.86rem, 1.7vw, 1.14rem);
       font-weight: 600;
-      letter-spacing: .3em;
-      line-height: 2.45;
+      letter-spacing: .24em;
+      line-height: 2.25;
       text-transform: uppercase;
-      word-spacing: 1.05rem;
+      word-spacing: .85rem;
       word-break: break-all;
       animation: binaryStream 18s linear infinite;
-      text-shadow: 0 0 18px rgba(0,200,255,.16);
-      mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 86%, transparent 100%);
+      text-shadow: 0 0 18px rgba(0,200,255,.2);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 4%, #000 92%, transparent 100%);
     }
 
     header,
@@ -90,9 +117,15 @@
     }
 
     @keyframes binaryStream {
-      from { transform: translateY(-8%); opacity: .08; }
-      35% { opacity: .16; }
-      to { transform: translateY(8%); opacity: .1; }
+      from { transform: translate3d(-2%, -10%, 0); opacity: .13; }
+      35% { opacity: .24; }
+      to { transform: translate3d(2%, 12%, 0); opacity: .16; }
+    }
+
+    @keyframes binarySweep {
+      from { transform: translate3d(5%, 10%, 0); opacity: .08; }
+      45% { opacity: .18; }
+      to { transform: translate3d(-5%, -10%, 0); opacity: .14; }
     }
 
     /* ── HEADER ─────────────────────────────────── */
@@ -346,6 +379,10 @@
       background: linear-gradient(145deg, var(--card), var(--border));
     }
 
+    img.about-photo {
+      object-position: center;
+    }
+
     .about-photo-wrap {
       display: flex;
       align-items: center;
@@ -391,13 +428,23 @@
       font-size: 2rem;
       color: var(--cyan);
       font-family: 'Space Grotesk', sans-serif;
+      position: relative;
+      overflow: hidden;
     }
     .project-thumb img,
     .cert-thumb img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .project-thumb span,
+    .cert-thumb span {
+      position: relative;
+      z-index: 1;
     }
 
     .project-body {
@@ -478,6 +525,8 @@
         linear-gradient(135deg, #102544, #1a3559);
       display: flex; align-items: center; justify-content: center;
       font-size: 3.55rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .cert-name {
@@ -880,8 +929,8 @@
         </p>
       </div>
       <div class="about-photo-wrap">
-        <!-- Replace src with your actual photo path e.g. src="photo.jpg" -->
-        <div class="about-photo"></div>
+        <!-- Upload your photo here: assets/profile/about-photo.jpg -->
+        <img class="about-photo" src="assets/profile/about-photo.jpg" alt="Niño Asan portrait" onerror="this.style.display='none'"/>
       </div>
     </div>
   </div>
@@ -955,7 +1004,11 @@
     </div>
 
     <div class="project-card">
-      <div class="project-thumb">🎟️</div>
+      <div class="project-thumb">
+        <!-- Upload this project screenshot here: assets/projects/id-queueing-simulator.jpg -->
+        <img src="assets/projects/id-queueing-simulator.jpg" alt="ID Queueing Simulator screenshot" loading="lazy" onerror="this.style.display='none'"/>
+        <span>🎟️</span>
+      </div>
       <div class="project-body">
         <p class="project-tag">Simulation</p>
         <p class="project-name">ID Queueing Simulator</p>
@@ -972,15 +1025,21 @@
   <p class="section-label">Credentials</p>
   <h2 class="section-title">Certifications</h2>
   <div class="certs-grid">
-    <!-- Put certificate images in assets/certifications/ and use an img tag inside cert-thumb, e.g. <img src="assets/certifications/network-security.jpg" alt="Network Security ITS Certificate"/> -->
-
     <div class="cert-card">
-      <div class="cert-thumb">🔒</div>
+      <div class="cert-thumb">
+        <!-- Upload this certificate here: assets/certifications/network-security-certificate.jpg -->
+        <img src="assets/certifications/network-security-certificate.jpg" alt="Network Security ITS Certificate" loading="lazy" onerror="this.style.display='none'"/>
+        <span>🔒</span>
+      </div>
       <p class="cert-name">Network Security ITS Certificate</p>
     </div>
 
     <div class="cert-card">
-      <div class="cert-thumb">🗄️</div>
+      <div class="cert-thumb">
+        <!-- Upload this certificate here: assets/certifications/databases-certificate.jpg -->
+        <img src="assets/certifications/databases-certificate.jpg" alt="Databases ITS Certificate" loading="lazy" onerror="this.style.display='none'"/>
+        <span>🗄️</span>
+      </div>
       <p class="cert-name">Databases ITS Certificate</p>
     </div>
 
