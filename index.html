@@ -155,14 +155,6 @@
       letter-spacing: -.5px;
     }
     .logo span { color: var(--cyan); }
-    .logo img {
-      display: block;
-      width: auto;
-      height: 34px;
-      max-width: 132px;
-      object-fit: contain;
-    }
-
     nav a {
       color: var(--muted);
       text-decoration: none;
@@ -959,7 +951,6 @@
       .hero-name { font-size: clamp(1.9rem, 8vw, 2.6rem); }
       .hero-role { font-size: 1.05rem; }
       .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .logo img { height: 30px; max-width: 112px; }
       #projects .projects-grid { gap: 1rem; }
       .project-card { min-height: 0; border-radius: 14px; }
       .project-thumb { height: auto; aspect-ratio: 16 / 9; }
@@ -977,9 +968,7 @@
 
 <!-- ═══ HEADER ══════════════════════════════════════════════ -->
 <header>
-  <a class="logo" href="#hero" aria-label="Ninz home">
-    <img src="header-photo.png" alt="Ninz logo"/>
-  </a>
+  <a class="logo" href="#hero">Ninz<span>.</span></a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
   <nav id="siteNav">
     <a href="#projects">Projects</a>
