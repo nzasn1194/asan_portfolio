@@ -145,6 +145,8 @@
     }
 
     .logo {
+      display: inline-flex;
+      align-items: center;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.25rem;
       font-weight: 700;
@@ -153,6 +155,13 @@
       letter-spacing: -.5px;
     }
     .logo span { color: var(--cyan); }
+    .logo img {
+      display: block;
+      width: auto;
+      height: 34px;
+      max-width: 132px;
+      object-fit: contain;
+    }
 
     nav a {
       color: var(--muted);
@@ -365,7 +374,15 @@
       align-items: center;
     }
 
-    .about-text p { color: var(--text); line-height: 1.8; }
+    .about-text p {
+      color: var(--text);
+      font-size: clamp(1.02rem, 1.35vw, 1.16rem);
+      font-weight: 500;
+      line-height: 1.85;
+      text-align: justify;
+      text-indent: 2rem;
+    }
+    .about-text strong { color: var(--white); font-weight: 700; }
 
     .about-photo {
       width: clamp(140px, 30vw, 240px);
@@ -399,8 +416,9 @@
     /* ── PROJECTS ────────────────────────────────── */
     #projects .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
       gap: clamp(1.5rem, 2.4vw, 2rem);
+      width: 100%;
       max-width: 1260px;
       margin: 0 auto;
     }
@@ -414,6 +432,7 @@
       overflow: hidden;
       height: 100%;
       min-height: 440px;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       transition: transform .2s, border-color .2s;
@@ -524,6 +543,7 @@
       font-size: .9rem;
       color: var(--muted);
       margin-bottom: 1.35rem;
+      overflow-wrap: anywhere;
     }
     .btn-view {
       display: inline-flex;
@@ -909,8 +929,12 @@
       .hero-name { font-size: clamp(1.9rem, 8vw, 2.6rem); }
       .hero-role { font-size: 1.05rem; }
       .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .project-card { min-height: 400px; }
-      .project-thumb { height: 150px; }
+      .logo img { height: 30px; max-width: 112px; }
+      #projects .projects-grid { gap: 1rem; }
+      .project-card { min-height: 0; border-radius: 14px; }
+      .project-thumb { height: auto; aspect-ratio: 16 / 9; }
+      .project-body { padding: 1.15rem; }
+      .project-desc { font-size: .86rem; line-height: 1.65; }
       .cert-card { min-height: 300px; }
       .cert-thumb { height: 210px; }
       .msg-card { padding: 1.25rem; }
@@ -923,7 +947,9 @@
 
 <!-- ═══ HEADER ══════════════════════════════════════════════ -->
 <header>
-  <a class="logo" href="#hero">Ninz<span>.</span></a>
+  <a class="logo" href="#hero" aria-label="Ninz home">
+    <img src="header-photo.png" alt="Ninz logo"/>
+  </a>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
   <nav id="siteNav">
     <a href="#projects">Projects</a>
@@ -975,16 +1001,12 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          I am Niño Asan, a third-year Computer Science student from Davao City, Philippines,
-          with a passion for technology, designing, and continuous learning. I enjoy exploring
-          areas such as web development, software engineering, cybersecurity, and emerging technologies.
-        </p>
-        <br/>
-        <p>
-          Through academic projects and hands-on experience, I strive to build practical and
-          innovative solutions while continuously improving my technical and creative skills.
-          My goal is to grow as a developer and contribute to meaningful projects that create
-          a positive impact.
+              I am Niño Asan, a third-year Computer Science student from Davao City with a strong passion for technology, innovation, and user-centered design. 
+          My primary expertise is in <strong>UI/UX design</strong>, where I focus on creating intuitive, engaging, and visually appealing digital experiences. Beyond design, 
+          I continuously expand my knowledge in web development, software engineering, cybersecurity, and emerging technologies, always eager to learn and adapt to 
+          new challenges. Through academic projects and hands-on experience, I strive to combine creativity and technical skills to develop meaningful solutions that 
+          deliver value and make a positive impact.
+
         </p>
       </div>
       <div class="about-photo-wrap">
@@ -1009,10 +1031,10 @@
         <img src="assets/projects/fp1-3.jpg" alt="SVS Beauty Salon Booking Management System" loading="lazy"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Web Development</p>
+        <p class="project-tag">2025-2026</p>
         <p class="project-name">SVS Beauty Salon Booking Management System</p>
-        <p class="project-desc">A full-stack booking and admin panel for a beauty salon covering six management subsystems.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <p class="project-desc">A full-stack booking and admin panel for a beauty salon covering six management subsystems that work together to ensure smooth operations.</p>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
@@ -1023,62 +1045,66 @@
         <img src="assets/projects/fp2-3.png" alt="NESTNOVA Property Listing System" loading="lazy"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Web Development</p>
+        <p class="project-tag">2025</p>
         <p class="project-name">NESTNOVA: Property Listing System</p>
         <p class="project-desc">A property listing platform for browsing and listing real estate with a modern UI.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-thumb">
-        <img src="assets/projects/fp3-1.jpg" alt="PROCOOK banking system performance comparison" loading="lazy"/>
-        <img src="assets/projects/fp3-2.jpg" alt="PROCOOK banking system performance comparison" loading="lazy"/>
-        <img src="assets/projects/fp3-3.jpg" alt="PROCOOK banking system performance comparison" loading="lazy"/>
+        <img src="assets/projects/fp3-1.jpg" alt="PRO Cook Personal Recipe Organizer" loading="lazy"/>
+        <img src="assets/projects/fp3-2.jpg" alt="PRO Cook Personal Recipe Organizer" loading="lazy"/>
+        <img src="assets/projects/fp3-3.jpg" alt="PRO Cook Personal Recipe Organizer" loading="lazy"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Banking &amp; Backend</p>
-        <p class="project-name">PROCOOK</p>
-        <p class="project-desc">A Go vs Python banking system performance comparison built for academic research.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <p class="project-tag">2024</p>
+        <p class="project-name">PRO Cook Personal Recipe Organizer</p>
+        <p class="project-desc">A personal recipe organizer with a modern UI for managing and sharing cooking recipes. The program will apply insertion sort to organize and manage data based on specific criteria provided by users.</p>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-thumb">
-        <img src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=600&h=400&fit=crop" alt="AquaGuard water supply prediction" loading="lazy"/>
+        <img src="assets/projects/fp4-1.jpg" alt="YUM-e Food Ordering System" loading="lazy"/>
+        <img src="assets/projects/fp4-2.jpg" alt="YUM-e Food Ordering System" loading="lazy"/>
+        <img src="assets/projects/fp4-3.jpg" alt="YUM-e Food Ordering System" loading="lazy"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Machine Learning</p>
-        <p class="project-name">AquaGuard</p>
-        <p class="project-desc">A hybrid ML framework for probabilistic water supply interruption prediction in Davao City.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <p class="project-tag">2024</p>
+        <p class="project-name">YUM-e Food Ordering System</p>
+        <p class="project-desc">This project aims to develop a solution that addresses the problem of long queues and delays at the university cafeteria during peak hours. By implementing a more efficient ordering and payment system, this project aims to reduce wait times, simplify the ordering process, and improve overall student satisfaction.</p>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-thumb">
-        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop" alt="FraudSense fraud detection system" loading="lazy"/>
+        <img src="assets/projects/fp5-1.png" alt="Automata and Language Theory" loading="lazy"/>
+        <img src="assets/projects/fp5-2.png" alt="Automata and Language Theory" loading="lazy"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Cybersecurity</p>
-        <p class="project-name">FraudSense</p>
-        <p class="project-desc">A fraudulent Facebook advertisement detection system leveraging ML classification.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <p class="project-tag">2024</p>
+        <p class="project-name">Automata and Language Theory</p>
+        <p class="project-desc">This project focuses on automata theory and its applications, implemented in Java with a graphical user interface (GUI) to enhance user interaction. The program provides five main modules—Deterministic and Nondeterministic Finite Automata (DFA/NFA), Pushdown Automata (PDA), Context-Free Grammar (CFG), Turing Machine, and the Tower of Hanoi—each accessible through designated buttons. </p>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-thumb">
         <!-- Upload this project screenshot here: assets/projects/id-queueing-simulator.jpg -->
-        <img src="assets/projects/id-queueing-simulator.jpg" alt="ID Queueing Simulator screenshot" loading="lazy" onerror="this.style.display='none'"/>
-        <span>🎟️</span>
+        <img src="assets/projects/fp6-1.jpg" alt="Wibrary Mini Library System" loading="lazy" onerror="this.style.display='none'"/>
+        <img src="assets/projects/fp6-2.jpg" alt="Wibrary Mini Library System" loading="lazy" onerror="this.style.display='none'"/>
+        <img src="assets/projects/fp6-3.jpg" alt="Wibrary Mini Library System" loading="lazy" onerror="this.style.display='none'"/>
       </div>
       <div class="project-body">
-        <p class="project-tag">Simulation</p>
-        <p class="project-name">ID Queueing Simulator</p>
-        <p class="project-desc">A browser-based discrete-event simulation of a public service ID queueing system with 4 counters.</p>
-        <a href="#" class="btn-view">VIEW</a>
+        <p class="project-tag">2023</p>
+        <p class="project-name">Wibrary Mini Library System</p>
+        <p class="project-desc">Wibrary is a mini library management system consisting of programming books. The system allows students to borrow and return books by entering their student name and ID. </p>
+        <a href="#" class="btn-view">REDIRECT</a>
       </div>
     </div>
 
