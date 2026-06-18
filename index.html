@@ -129,6 +129,28 @@
       to { transform: translate3d(0, 220vh, 0); }
     }
 
+    @keyframes aboutPhotoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-9px) rotate(1.2deg); }
+    }
+
+    @keyframes aboutPhotoPulse {
+      0%, 100% { opacity: .42; transform: scale(.94); }
+      50% { opacity: .78; transform: scale(1.05); }
+    }
+
+    @keyframes keycapDrift {
+      0% {
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0) scale(.72) rotate(var(--tilt, 0deg));
+      }
+      16% { opacity: .95; }
+      100% {
+        opacity: 0;
+        transform: translate3d(calc(-50% + var(--x, 0px)), calc(-50% + var(--y, -48px)), 0) scale(1.08) rotate(calc(var(--tilt, 0deg) + 18deg));
+      }
+    }
+
     /* ── HEADER ─────────────────────────────────── */
     header {
       position: sticky;
@@ -387,12 +409,15 @@
       height: clamp(140px, 30vw, 240px);
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--border);
+      border: 3px solid rgba(0,200,255,.38);
       display: block;
       margin: 0 auto;
       background: var(--card);
       /* placeholder circle gradient, overridden when a real photo is added */
       background: linear-gradient(145deg, var(--card), var(--border));
+      box-shadow: 0 0 0 8px rgba(0,200,255,.05), 0 20px 54px rgba(0,0,0,.35);
+      animation: aboutPhotoFloat 5s ease-in-out infinite;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease, filter .35s ease;
     }
 
     img.about-photo {
@@ -409,6 +434,61 @@
       border-radius: 16px;
       border: 1px solid var(--border);
       padding: 24px;
+      overflow: hidden;
+      position: relative;
+      transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+
+    .about-photo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 72%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,255,.32), transparent 68%);
+      filter: blur(18px);
+      animation: aboutPhotoPulse 4.2s ease-in-out infinite;
+    }
+
+    .about-photo-wrap:hover {
+      border-color: rgba(0,200,255,.58);
+      box-shadow: 0 22px 54px rgba(0,200,255,.13);
+      transform: translateY(-4px);
+    }
+
+    .about-photo-wrap:hover .about-photo {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 10px rgba(0,200,255,.08), 0 0 42px rgba(0,200,255,.32);
+      filter: saturate(1.08) contrast(1.03);
+      transform: translateY(-7px) rotate(1.5deg) scale(1.035);
+    }
+
+    .keycap-trail {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 9999;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      border: 1px solid rgba(0,200,255,.56);
+      border-bottom-color: rgba(0,229,192,.82);
+      border-radius: 7px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.13), transparent 40%),
+        linear-gradient(145deg, rgba(13,28,49,.94), rgba(6,13,26,.92));
+      color: var(--cyan);
+      font-family: 'Space Grotesk', monospace;
+      font-size: .68rem;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 0 12px rgba(0,200,255,.7);
+      box-shadow: 0 8px 20px rgba(0,0,0,.26), 0 0 24px rgba(0,200,255,.2);
+      animation: keycapDrift .88s ease-out forwards;
+      will-change: transform, opacity;
     }
 
     /* ── PROJECTS ────────────────────────────────── */
@@ -1054,7 +1134,7 @@
         <p class="project-name">SVS Beauty Salon Booking Management System</p>
         <p class="project-desc">A full-stack booking and admin panel for a beauty salon covering six management subsystems that work together to ensure smooth operations.</p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/svs-booking.pdf -->
-        <a href="assets/projects/fp1-1.jpg" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="https://github.com/jnbrv/SVS-Korean-Beauty-Salon" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1069,7 +1149,7 @@
         <p class="project-name">NESTNOVA: Property Listing System</p>
         <p class="project-desc">A property listing platform for browsing and listing real estate with a modern UI.</p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/nestnova.pdf -->
-        <a href="assets/projects/fp2-1.png" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="https://github.com/jnbrv/NESTNOVA" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1084,7 +1164,7 @@
         <p class="project-name">PRO Cook Personal Recipe Organizer</p>
         <p class="project-desc">A personal recipe organizer with a modern UI for managing and sharing cooking recipes. The program will apply insertion sort to organize and manage data based on specific criteria provided by users.</p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/pro-cook.pdf -->
-        <a href="assets/projects/fp3-1.jpg" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="assets/projects/PROCook.pdf" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1099,7 +1179,7 @@
         <p class="project-name">YUM-e Food Ordering System</p>
         <p class="project-desc">This project aims to develop a solution that addresses the problem of long queues and delays at the university cafeteria during peak hours. By implementing a more efficient ordering and payment system, this project aims to reduce wait times, simplify the ordering process, and improve overall student satisfaction.</p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/yum-e.pdf -->
-        <a href="assets/projects/fp4-1.jpg" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="assets/projects/YUM-e.pdf" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1113,7 +1193,7 @@
         <p class="project-name">Automata and Language Theory</p>
         <p class="project-desc">This project focuses on automata theory and its applications, implemented in Java with a graphical user interface (GUI) to enhance user interaction. The program provides five main modules—Deterministic and Nondeterministic Finite Automata (DFA/NFA), Pushdown Automata (PDA), Context-Free Grammar (CFG), Turing Machine, and the Tower of Hanoi—each accessible through designated buttons. </p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/automata.pdf -->
-        <a href="assets/projects/fp5-1.png" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="assets/projects/CST4.pdf" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1129,7 +1209,7 @@
         <p class="project-name">Wibrary Mini Library System</p>
         <p class="project-desc">Wibrary is a mini library management system consisting of programming books. The system allows students to borrow and return books by entering their student name and ID. </p>
         <!-- Replace href with a live URL or uploaded file path, e.g. assets/project-files/wibrary.pdf -->
-        <a href="assets/projects/fp6-1.jpg" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
+        <a href="assets/projects/Wibrary Mini Library System.pdf" class="btn-view" target="_blank" rel="noopener">REDIRECT</a>
       </div>
     </div>
 
@@ -1178,6 +1258,16 @@
         <div class="exp-entry">
           <div>
             <p class="exp-date">2026</p>
+            <p class="exp-type">Workshop</p>
+          </div>
+          <div>
+            <p class="exp-role">ReactJS &amp; GitHub Training</p>
+          </div>
+        </div>
+
+        <div class="exp-entry">
+          <div>
+            <p class="exp-date">2026</p>
             <p class="exp-type">Seminar</p>
           </div>
           <div>
@@ -1205,7 +1295,8 @@
           <span class="skill-tag">Canva</span>
           <span class="skill-tag">Figma</span>
           <span class="skill-tag">Microsoft Literate</span>
-          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
           <span class="skill-tag">JavaScript</span>
           <span class="skill-tag">SQL</span>
         </div>
@@ -1355,6 +1446,36 @@
 
     thumb.append(prevButton, nextButton);
   });
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    const keycaps = ['UI', 'UX', 'JS', 'CSS', '<>', '01', 'AI', 'SQL', 'PHP', 'F'];
+    let lastKeycapAt = 0;
+    let keycapIndex = 0;
+
+    window.addEventListener('mousemove', event => {
+      const now = performance.now();
+      if (now - lastKeycapAt < 58) return;
+      lastKeycapAt = now;
+
+      const keycap = document.createElement('span');
+      const driftX = `${Math.round((Math.random() - .5) * 58)}px`;
+      const driftY = `${Math.round(-36 - Math.random() * 42)}px`;
+      const tilt = `${Math.round((Math.random() - .5) * 24)}deg`;
+
+      keycap.className = 'keycap-trail';
+      keycap.textContent = keycaps[keycapIndex % keycaps.length];
+      keycap.style.left = `${event.clientX}px`;
+      keycap.style.top = `${event.clientY}px`;
+      keycap.style.setProperty('--x', driftX);
+      keycap.style.setProperty('--y', driftY);
+      keycap.style.setProperty('--tilt', tilt);
+
+      document.body.appendChild(keycap);
+      keycapIndex += 1;
+      keycap.addEventListener('animationend', () => keycap.remove(), { once: true });
+    }, { passive: true });
+  }
 </script>
 
 </body>
