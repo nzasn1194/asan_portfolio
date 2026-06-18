@@ -15,6 +15,6 @@
   </defs>
   <rect width="64" height="64" rx="14" fill="#060d1a"/>
   <rect x="5" y="5" width="54" height="54" rx="12" fill="#0f1e33" stroke="url(#g)" stroke-width="2"/>
-  <path d="M13 45V19h6.2l10.7 15.2V19H36v26h-5.9L19 29.2V45h-6zm27 0V19h10.2c6 0 9.6 2.9 9.6 7.4 0 2.4-1.2 4.5-3.4 5.5 2.8 1 4.4 3.2 4.4 6 0 4.6-3.7 7.1-9.9 7.1H40zm6-15.2h4c2.3 0 3.7-1 3.7-2.9s-1.3-2.9-3.7-2.9h-4v5.8zm0 10.2h4.8c2.5 0 3.9-1.1 3.9-3.1 0-2.1-1.4-3.2-4-3.2H46V40z" fill="url(#g)" filter="url(#glow)"/>
+  <text x="32" y="39" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" letter-spacing="1.2" fill="url(#g)" filter="url(#glow)">NBA</text>
   <circle cx="51" cy="50" r="3" fill="#00c8ff"/>
 </svg>
