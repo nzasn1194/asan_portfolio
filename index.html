@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Niño Asan — Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -151,6 +152,16 @@
       }
     }
 
+    @keyframes roleShimmer {
+      from { background-position: 0% 50%; }
+      to { background-position: 220% 50%; }
+    }
+
+    @keyframes roleSignal {
+      0%, 100% { opacity: .18; transform: translateX(-18%); }
+      50% { opacity: .72; transform: translateX(118%); }
+    }
+
     /* ── HEADER ─────────────────────────────────── */
     header {
       position: sticky;
@@ -256,6 +267,28 @@
       font-weight: 600;
       color: var(--white);
       margin-bottom: 1.2rem;
+      position: relative;
+      width: fit-content;
+      max-width: 100%;
+      overflow: hidden;
+      background: linear-gradient(90deg, var(--white) 0%, var(--cyan) 28%, var(--teal) 46%, #8aa7ff 62%, var(--white) 82%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 24px rgba(0,200,255,.16);
+      animation: roleShimmer 4.6s linear infinite;
+    }
+
+    .hero-role::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 42%;
+      background: linear-gradient(90deg, transparent, rgba(0,200,255,.42), transparent);
+      mix-blend-mode: screen;
+      animation: roleSignal 3.2s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .hero-desc {
@@ -1040,6 +1073,13 @@
       .cert-thumb { height: 210px; }
       .msg-card { padding: 1.25rem; }
       .connect-meta { gap: .75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-role,
+      .hero-role::after {
+        animation: none;
+      }
     }
   </style>
 </head>
